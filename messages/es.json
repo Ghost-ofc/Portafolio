@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "education": "Educación",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "ctaProjects": "Ver proyectos",
+    "ctaContact": "Contactar",
+    "ctaResume": "Ver CV"
+  },
+  "about": {
+    "title": "Sobre mí"
+  },
+  "skills": {
+    "title": "Habilidades"
+  },
+  "education": {
+    "title": "Educación",
+    "current": "En curso",
+    "certifications": "Certificaciones"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "featuredBadge": "Destacado",
+    "viewLive": "Ver sitio",
+    "viewCode": "Ver código"
+  },
+  "contact": {
+    "title": "Hablemos",
+    "description": "¿Tienes un proyecto en mente o quieres conversar sobre alguna oportunidad? Escríbeme.",
+    "emailCta": "Enviar email",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntame sobre la oportunidad...",
+      "send": "Enviar mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado! Te responderé pronto.",
+      "error": "No se pudo enviar el mensaje. Intenta de nuevo o escríbeme directo por email."
+    }
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "theme": {
+    "toggle": "Cambiar tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "locale": {
+    "label": "Idioma"
+  }
+}

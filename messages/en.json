@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "ctaProjects": "View projects",
+    "ctaContact": "Get in touch",
+    "ctaResume": "View resume"
+  },
+  "about": {
+    "title": "About me"
+  },
+  "skills": {
+    "title": "Skills"
+  },
+  "education": {
+    "title": "Education",
+    "current": "Ongoing",
+    "certifications": "Certifications"
+  },
+  "projects": {
+    "title": "Projects",
+    "featuredBadge": "Featured",
+    "viewLive": "View site",
+    "viewCode": "View code"
+  },
+  "contact": {
+    "title": "Let's talk",
+    "description": "Have a project in mind or want to talk about an opportunity? Reach out.",
+    "emailCta": "Send email",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about the opportunity...",
+      "send": "Send message",
+      "sending": "Sending...",
+      "success": "Message sent! I'll get back to you soon.",
+      "error": "Couldn't send the message. Try again or email me directly."
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "locale": {
+    "label": "Language"
+  }
+}
