@@ -326,6 +326,11 @@ export function Projects() {
                           <h3 className="font-semibold" style={DISPLAY_FONT}>
                             {project.name}
                           </h3>
+                          {project.role && (
+                            <p className="mt-1 font-mono text-xs text-primary">
+                              {project.role[locale]}
+                            </p>
+                          )}
                           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                             {project.description[locale]}
                           </p>

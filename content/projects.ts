@@ -1,6 +1,7 @@
 import type { StaticImageData } from "next/image";
 import type { LocalizedText } from "./types";
 import hotsalePayShot from "@/public/projects/hotsale-pay.webp";
+import subliflashShot from "@/public/projects/subliflash.webp";
 import illariShot from "@/public/projects/illari-gourmet.webp";
 import liquidaloShot from "@/public/projects/liquidalo.webp";
 import meiliShot from "@/public/projects/meili.webp";
@@ -8,11 +9,14 @@ import tumacetaShot from "@/public/projects/tumaceta.webp";
 import herraminShot from "@/public/projects/herramin-peru.webp";
 import affinityShot from "@/public/projects/affinity-broker-peru.webp";
 import tampumayuShot from "@/public/projects/hotel-tampumayu.webp";
+import dermotiendaShot from "@/public/projects/dermotienda.webp";
 
 export type Project = {
   slug: string;
   name: string;
   description: LocalizedText;
+  /** Mi participación cuando no construí el proyecto completo (p. ej. soporte). */
+  role?: LocalizedText;
   /** Mini case study fields */
   problem?: LocalizedText;
   solution?: LocalizedText;
@@ -65,6 +69,30 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "subliflash",
+    name: "SubliFlash Perú",
+    description: {
+      es: "Tienda Magento de telas sublimadas, disfraces e inflables, integrada con Odoo ERP para sincronizar productos, stock y ventas.",
+      en: "Magento store for sublimated fabrics, costumes and inflatables, integrated with Odoo ERP to sync products, stock and sales.",
+    },
+    problem: {
+      es: "El catálogo, el inventario y los pedidos se gestionaban en Odoo y en la tienda por separado, con riesgo de vender sin stock y doble trabajo para el equipo.",
+      en: "Catalog, inventory and orders were managed separately in Odoo and the store, risking overselling and duplicating the team's work.",
+    },
+    solution: {
+      es: "Tienda en Magento 2 con Hyvä y una integración con Odoo ERP: los productos y el stock se sincronizan desde el ERP y las ventas de la web vuelven a Odoo.",
+      en: "Magento 2 store on Hyvä plus an Odoo ERP integration: products and stock sync from the ERP and web sales flow back into Odoo.",
+    },
+    impact: {
+      es: "Odoo como única fuente de verdad: stock al día en la web y pedidos registrados sin carga manual.",
+      en: "Odoo as the single source of truth: up-to-date stock on the web and orders recorded without manual entry.",
+    },
+    tech: ["Magento 2", "Hyvä", "Alpine.js", "Tailwind CSS", "PHP", "Odoo ERP"],
+    screenshot: subliflashShot,
+    liveUrl: "https://subliflash.pe/",
+    featured: true,
+  },
+  {
     slug: "illari-gourmet",
     name: "Illari Gourmet",
     description: {
@@ -104,10 +132,22 @@ export const projects: Project[] = [
     slug: "meili",
     name: "Meili.pe",
     description: {
-      es: "Tienda online de cosméticos en Perú: SPA en React que consume una API REST propia en Spring Boot para catálogo, ofertas y lista de deseos.",
-      en: "Online cosmetics store in Peru: a React SPA backed by a custom Spring Boot REST API for catalog, offers and wishlist.",
+      es: "Tienda online de cosméticos en Perú: SPA en React sobre una API reactiva propia en Spring WebFlux para catálogo, ofertas y lista de deseos.",
+      en: "Online cosmetics store in Peru: a React SPA on top of a custom reactive Spring WebFlux API for catalog, offers and wishlist.",
     },
-    tech: ["React", "Vite", "Tailwind CSS", "Zustand", "Java", "Spring Boot", "REST API"],
+    problem: {
+      es: "La tienda concentra muchas peticiones simultáneas (catálogo, búsquedas, ofertas y lista de deseos) que pasan la mayor parte del tiempo esperando a la base de datos y a otros servicios, y un servidor bloqueante dedica un hilo a cada una mientras espera.",
+      en: "The store handles many concurrent requests (catalog, search, offers and wishlist) that spend most of their time waiting on the database and other services, and a blocking server ties up one thread per request while it waits.",
+    },
+    solution: {
+      es: "Backend con Spring WebFlux y programación reactiva (Project Reactor sobre Netty): un event loop no bloqueante atiende muchas conexiones con pocos hilos, y las consultas independientes se combinan en paralelo con Mono/Flux. El frontend es una SPA en React con Zustand para el estado.",
+      en: "Backend built with Spring WebFlux and reactive programming (Project Reactor on Netty): a non-blocking event loop serves many connections with few threads, and independent queries are combined in parallel with Mono/Flux. The frontend is a React SPA with Zustand for state.",
+    },
+    impact: {
+      es: "La API soporta picos de tráfico, como campañas y ofertas, con menos recursos que un modelo de un hilo por petición, y responde más rápido al consultar varias fuentes a la vez.",
+      en: "The API absorbs traffic spikes such as campaigns and sales with fewer resources than a thread-per-request model, and answers faster when it queries several sources at once.",
+    },
+    tech: ["React", "Vite", "Tailwind CSS", "Zustand", "Java", "Spring WebFlux", "Project Reactor", "REST API"],
     screenshot: meiliShot,
     liveUrl: "https://meili.pe/",
     featured: true,
@@ -157,6 +197,21 @@ export const projects: Project[] = [
     tech: ["WordPress", "WooCommerce", "Elementor Pro", "LiteSpeed Cache"],
     screenshot: tampumayuShot,
     liveUrl: "https://hoteltampumayu.pe/",
+  },
+  {
+    slug: "dermotienda",
+    name: "Dermotienda",
+    role: {
+      es: "Soporte en diseño y funcionalidades",
+      en: "Design & feature support",
+    },
+    description: {
+      es: "Tienda online de dermocosmética con más de 25 marcas de skincare, rutinas y packs, y asesoría personalizada.",
+      en: "Online dermocosmetics store with 25+ skincare brands, routines and bundles, and personalized advice.",
+    },
+    tech: ["Shopify", "Liquid", "JavaScript", "CSS"],
+    screenshot: dermotiendaShot,
+    liveUrl: "https://dermotiendashopping.com/",
   },
 
   // ─── Código y proyectos técnicos ───────────────────────────────────────
