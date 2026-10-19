@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import { routing } from "@/i18n/routing";
 import { profile } from "@/content/profile";
 import "../globals.css";
@@ -154,11 +155,13 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Nav />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer />
+            <MotionProvider>
+              <Nav />
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </MotionProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

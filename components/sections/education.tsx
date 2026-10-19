@@ -49,21 +49,26 @@ function DegreeTimeline() {
         <span className="text-primary font-medium">{now >= end ? "✓ " : ""}{end}</span>
       </div>
 
-      {/* Track */}
-      <div className="relative h-2 w-full overflow-hidden rounded-full bg-secondary/80">
+      {/* Track — bar and tip slide in with transform only (no width/left) */}
+      <div className="relative h-2 w-full">
+        <div className="absolute inset-0 overflow-hidden rounded-full bg-secondary/80">
+          <motion.div
+            className="h-full w-full rounded-full bg-gradient-to-r from-primary/60 to-primary"
+            initial={{ x: "-100%" }}
+            animate={{ x: inView ? `${pct - 100}%` : "-100%" }}
+            transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
+          />
+        </div>
+        {/* Glowing tip rides on the right edge of a full-width layer */}
         <motion.div
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-primary/60 to-primary"
-          initial={{ width: "0%" }}
-          animate={inView ? { width: `${pct}%` } : { width: "0%" }}
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          initial={{ x: "-100%" }}
+          animate={{ x: inView ? `${pct - 100}%` : "-100%" }}
           transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
-        />
-        {/* Glowing tip */}
-        <motion.div
-          className="absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_10px_2px] shadow-primary/70"
-          initial={{ left: "0%" }}
-          animate={inView ? { left: `calc(${pct}% - 7px)` } : { left: "0%" }}
-          transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
-        />
+        >
+          <span className="absolute -right-[7px] top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_10px_2px] shadow-primary/70" />
+        </motion.div>
       </div>
 
       {/* Status badge */}

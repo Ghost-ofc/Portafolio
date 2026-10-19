@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LocaleSwitcher } from "@/components/locale-switcher";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { profile } from "@/content/profile";
 import { Button } from "@/components/ui/button";
 import {
@@ -158,6 +159,7 @@ export function Nav() {
           </Sheet>
         </div>
       </div>
+      <ScrollProgress />
     </header>
   );
 }

@@ -1,9 +1,25 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { Reveal } from "@/components/motion/reveal";
+import { Spotlight } from "@/components/motion/spotlight";
 import { skillCategories } from "@/content/skills";
 import { skillIcons } from "@/content/skill-icons";
+
+const pills = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.035, delayChildren: 0.15 } },
+};
+const pill = {
+  hidden: { opacity: 0, y: 8, scale: 0.96 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
+};
 
 // Domain accent colors for each category header
 const DOMAIN_COLORS: Record<string, string> = {
@@ -44,7 +60,7 @@ export function Skills() {
             const accentColor = DOMAIN_COLORS[category.id] ?? "#F59E0B";
             return (
               <Reveal key={category.id} delay={index * 0.07}>
-                <div className="group relative rounded-xl border bg-card p-5 card-glow h-full">
+                <Spotlight className="group rounded-xl border bg-card p-5 card-glow h-full">
                   {/* Colored domain indicator bar */}
                   <div
                     className="mb-4 flex items-center gap-2.5"
@@ -62,14 +78,22 @@ export function Skills() {
                     </h3>
                   </div>
 
-                  {/* Pills */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Pills — cascade in once the card is visible */}
+                  <motion.div
+                    variants={pills}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-40px" }}
+                    className="flex flex-wrap gap-2"
+                  >
                     {category.items.map((item) => {
                       const icon = skillIcons[item];
                       return (
-                        <span
+                        <motion.span
                           key={item}
-                          className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-background/60 px-3 py-1.5 text-xs font-medium text-foreground transition-transform hover:-translate-y-0.5"
+                          variants={pill}
+                          whileHover={{ y: -2 }}
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-background/60 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-primary/40"
                         >
                           {icon && (
                             <icon.Icon
@@ -79,11 +103,11 @@ export function Skills() {
                             />
                           )}
                           {item}
-                        </span>
+                        </motion.span>
                       );
                     })}
-                  </div>
-                </div>
+                  </motion.div>
+                </Spotlight>
               </Reveal>
             );
           })}

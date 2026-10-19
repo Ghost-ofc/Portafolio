@@ -69,6 +69,19 @@ const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
 };
+const headline = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+const word = {
+  hidden: { y: "110%" },
+  show: { y: "0%", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+};
+
+const HEADLINE = {
+  es: [{ text: "Hola," }, { text: "soy", gradient: true }, { text: "Juan.", gradient: true }],
+  en: [{ text: "Hi," }, { text: "I'm", gradient: true }, { text: "Juan.", gradient: true }],
+} satisfies Record<"es" | "en", { text: string; gradient?: boolean }[]>;
 
 export function Hero() {
   const t = useTranslations("hero");
@@ -76,10 +89,11 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      {/* Ambient amber glow — top right */}
+      {/* Ambient backdrop — masked grid + drifting amber glow */}
+      <div aria-hidden className="hero-grid pointer-events-none absolute inset-0 opacity-60" />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-24 -right-8 size-72 rounded-full bg-primary/12 blur-[100px] sm:size-[36rem]"
+        className="hero-glow pointer-events-none absolute -top-24 -right-8 size-72 rounded-full bg-primary/12 blur-[100px] sm:size-[36rem]"
       />
 
       <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-16 lg:py-32">
@@ -101,16 +115,22 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Name — mobile-first sizing */}
+          {/* Name — words rise from behind a mask */}
           <motion.h1
-            variants={item}
+            variants={headline}
             className="text-[2.4rem] font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
           >
-            {locale === "es" ? (
-              <>Hola,{" "}<span className="text-gradient">soy Juan.</span></>
-            ) : (
-              <>Hi,{" "}<span className="text-gradient">I&apos;m Juan.</span></>
-            )}
+            {HEADLINE[locale].map(({ text, gradient }, i) => (
+              <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+                <motion.span
+                  variants={word}
+                  className={`inline-block ${gradient ? "text-gradient" : ""}`}
+                >
+                  {text}
+                </motion.span>
+                {" "}
+              </span>
+            ))}
           </motion.h1>
 
           {/* Typing role */}

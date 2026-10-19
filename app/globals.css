@@ -156,6 +156,49 @@
   border-color: oklch(0.79 0.17 75 / 35%);
 }
 
+/* Pointer-follow glow (see components/motion/spotlight.tsx) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    oklch(0.79 0.17 75 / 9%),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+@media (hover: none) {
+  .spotlight::before { display: none; }
+}
+
+/* Hero ambient backdrop: masked grid + drifting amber glow */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(-6%, 8%, 0) scale(1.12); }
+}
+.hero-glow {
+  animation: drift 14s ease-in-out infinite;
+}
+
 /* Skip to content */
 .skip-link {
   position: absolute;
@@ -190,6 +233,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cursor-blink { animation: none; opacity: 1; }
+  .hero-glow { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
